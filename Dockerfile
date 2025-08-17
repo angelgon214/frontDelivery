@@ -1,29 +1,15 @@
-# Usa una imagen base oficial de Node.js
-FROM node:20
-
-# Establece el directorio de trabajo
+# Stage 1: Build Angular
+FROM node:20-alpine AS build
 WORKDIR /app
-
-# Copia package.json y package-lock.json
 COPY package*.json ./
-
-# Instala dependencias globales (incluye Angular CLI si es necesario)
-RUN npm install -g @angular/cli
-
-# Instala dependencias del proyecto
-RUN npm install --legacy-peer-deps
-
-# Copia el resto del código
+RUN npm install
 COPY . .
+RUN npm run build --configuration production
 
-# Construye la aplicación Angular
-RUN ng build
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expone el puerto que usa Cloud Run (por defecto 8080)
-EXPOSE 8080
-
-# Configura la variable de entorno PORT
-ENV PORT=8080
-
-# Comando para iniciar la aplicación
-CMD ["node", "server.js"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
