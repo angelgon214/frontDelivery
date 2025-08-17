@@ -32,7 +32,7 @@ export interface Package {
   providedIn: 'root'
 })
 export class DeliveryService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://backdelivery2-208787378023.northamerica-south1.run.app/api';
 
   constructor(private http: HttpClient) { }
 

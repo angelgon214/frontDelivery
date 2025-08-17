@@ -74,7 +74,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     this.initializeForm();
     
     // Inicializar Socket.IO para recibir ubicaciones
-    this.socket = io('http://localhost:3000', {
+    this.socket = io('https://backdelivery2-208787378023.northamerica-south1.run.app/',{
       transports: ['websocket', 'polling'],
       timeout: 20000
     });
