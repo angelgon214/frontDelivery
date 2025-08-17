@@ -17,7 +17,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Construye la aplicación Angular
-RUN ng build --prod
+RUN ng build
 
 # Expone el puerto que usa Cloud Run (por defecto 8080)
 EXPOSE 8080
