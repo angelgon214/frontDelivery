@@ -4,14 +4,19 @@ const fs = require('fs');
 const app = express();
 
 const distPath = path.join(__dirname, 'dist/frontend');
+console.log('Verificando carpeta dist: ' + distPath);
+
 if (!fs.existsSync(distPath)) {
-  console.error(`Error: La carpeta ${distPath} no existe`);
+  console.error('Error: La carpeta dist/frontend no existe');
   process.exit(1);
+} else {
+  console.log('Carpeta dist/frontend encontrada');
 }
 
 app.use(express.static(distPath));
 
 app.get('/*', (req, res) => {
+  console.log('Solicitud recibida para: ' + req.url);
   res.sendFile(path.join(distPath, 'index.html'), (err) => {
     if (err) {
       console.error('Error al servir index.html:', err);
