@@ -1,0 +1,235 @@
+<div class="dashboard-layout">
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">DeliveryApp</div>
+    </div>
+    
+    <div class="sidebar-menu">
+      <div class="menu-item active">
+        <i class="pi pi-home"></i>
+        <span>Dashboard</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-box"></i>
+        <span>Mis Entregas</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-map"></i>
+        <span>Mapa de Rutas</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-history"></i>
+        <span>Historial</span>
+      </div>
+    </div>
+    
+    <div class="sidebar-footer">
+      <div class="menu-item" (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+        <span>Cerrar Sesión</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Content Area -->
+  <div class="main-content">
+   
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <div class="content-header">
+        <h1 class="page-title">Dashboard de Entregas</h1>
+        <p class="page-subtitle">Bienvenido de nuevo</p>
+      </div>
+      
+      <!-- Map Section -->
+      <div class="map-container">
+        <div class="section-header">
+          <h2>Mapa de Entregas</h2>
+          <div class="section-actions">
+            <button class="action-button" title="Actualizar mapa">
+              <i class="pi pi-refresh"></i>
+            </button>
+            <button class="action-button" title="Expandir mapa">
+              <i class="pi pi-window-maximize"></i>
+            </button>
+          </div>
+        </div>
+        <div class="map-wrapper">
+          <div id="deliveryMap" class="delivery-map"></div>
+        </div>
+      </div>
+      
+      <!-- Packages Table -->
+      <div class="packages-section">
+        <div class="section-header">
+          <h2>Mis Entregas Asignadas</h2>
+          <div class="section-actions">
+            <button class="action-button" title="Filtrar">
+              <i class="pi pi-filter"></i>
+            </button>
+            <button class="action-button" title="Actualizar">
+              <i class="pi pi-refresh"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <p-table [value]="packages" [tableStyle]="{'min-width': '50rem'}" styleClass="custom-table">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>ID Paquete</th>
+                <th>Dirección</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-package>
+              <tr class="table-row">
+                <td><span class="package-id">{{ package.id }}</span></td>
+                <td>
+                  <div class="address-cell">
+                    <i class="pi pi-map-marker location-icon"></i>
+                    <span class="address-text">{{ package.delivery_address }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="status-badge" [ngClass]="'status-' + package.status">
+                    <i class="pi" [ngClass]="getStatusIcon(package.status)"></i>
+                    {{ getStatusLabel(package.status) }}
+                  </span>
+                </td>
+                <td>
+                  <span class="priority-badge" [ngClass]="'priority-' + package.priority">
+                    <i class="pi" [ngClass]="getPriorityIcon(package.priority)"></i>
+                    {{ getPriorityLabel(package.priority) }}
+                  </span>
+                </td>
+                <td>
+                  <div class="phone-cell">
+                    <i class="pi pi-phone phone-icon"></i>
+                    <span class="phone-text">{{ package.phone }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="table-action-button status" title="Cambiar estatus" (click)="openStatusModal(package)">
+                      <i class="pi pi-exchange"></i> Estatus
+                    </button>
+                    <button class="table-action-button view" title="Ver detalles">
+                      <i class="pi pi-eye"></i>
+                    </button>
+                  </div>
+                </td>
+
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para actualizar estado -->
+  <p-dialog [(visible)]="updateStatusModalVisible" [style]="{width: '500px'}" [modal]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <div class="dialog-header-content">
+        <span class="dialog-title">Actualizar Estado del Paquete</span>
+      </div>
+    </ng-template>
+    
+    <div *ngIf="selectedPackage" class="update-status-content">
+      <div class="dialog-header">
+        <div class="dialog-icon">
+          <i class="pi pi-box"></i>
+        </div>
+        <div>
+          <h3 class="dialog-title">Paquete #{{ selectedPackage.id }}</h3>
+          <p class="dialog-subtitle">Actualiza el estado de entrega de este paquete</p>
+        </div>
+      </div>
+      
+      <div class="package-info-grid">
+        
+        <div class="info-item">
+          <div class="info-label">Teléfono</div>
+          <div class="info-value">{{ selectedPackage.phone }}</div>
+        </div>
+        
+        <div class="info-item full-width">
+          <div class="info-label">Dirección</div>
+          <div class="info-value address-value">
+            <i class="pi pi-map-marker location-icon"></i>
+            <span>{{ selectedPackage.delivery_address }}</span>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-label">Estado Actual</div>
+          <div class="info-value">
+            <span class="status-badge" [ngClass]="{
+              'status-pending': selectedPackage.status === 'pending',
+              'status-in_transit': selectedPackage.status === 'in_transit',
+              'status-delivered': selectedPackage.status === 'delivered'
+            }">
+              <i class="pi" [ngClass]="getStatusClass(selectedPackage.status)"></i>
+              {{ getStatusLabel(selectedPackage.status) }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-label">Prioridad</div>
+          <div class="info-value">
+            <span class="priority-badge" [ngClass]="{
+              'priority-low': selectedPackage.priority === 'low',
+              'priority-medium': selectedPackage.priority === 'medium',
+              'priority-high': selectedPackage.priority === 'high'
+            }">
+              <i class="pi" [ngClass]="getPriorityIcon(selectedPackage.priority)"></i>
+              {{ getPriorityLabel(selectedPackage.priority) }}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Actualizar Estado</label>
+        <div class="form-input-wrapper">
+         <p-select [options]="statusOptions" [(ngModel)]="selectedStatus" 
+                      optionLabel="label" optionValue="value" 
+                      styleClass="form-select" [style]="{width: '100%'}"
+                      placeholder="Selecciona un nuevo estado">
+            <ng-template pTemplate="selectedItem">
+              <div class="status-option-item" *ngIf="selectedStatus">
+                <i class="pi" [ngClass]="getStatusIcon(selectedStatus)"></i>
+                <span>{{ getStatusLabel(selectedStatus) }}</span>
+              </div>
+            </ng-template>
+            <ng-template let-option pTemplate="item">
+              <div class="status-option-item">
+                <i class="pi" [ngClass]="getStatusIcon(option.value)"></i>
+                <span>{{ option.label }}</span>
+              </div>
+            </ng-template>
+          </p-select>
+        </div>
+      </div>
+    </div>
+    
+    <ng-template pTemplate="footer">
+      <div class="form-actions">
+        <button class="btn btn-cancel" (click)="closeStatusModal()">
+          <i class="pi pi-times"></i>
+          Cancelar
+        </button>
+        <button class="btn btn-submit" (click)="updateStatus(selectedStatus)">
+          <i class="pi pi-check"></i>
+          Actualizar Estado
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>

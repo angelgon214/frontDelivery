@@ -1,0 +1,1139 @@
+/* Estilos generales */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.logo-text .accent {
+  color: #ff6b6b;
+}
+
+.sidebar-divider {
+  height: 1px;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0.5rem 0;
+}
+
+.sidebar-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.menu-item i {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.menu-item.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-left: 3px solid #ff6b6b;
+}
+
+.sidebar-footer {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.logout {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.menu-item.logout:hover {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+/* Contenido Principal */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+}
+
+/* Header del contenido */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-title h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-container {
+  position: relative;
+  width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #95a5a6;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 0.6rem 0.6rem 2.5rem;
+  border-radius: 50px;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Tarjetas de Estadísticas */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.stat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-top: 0.25rem;
+}
+
+.stat-trend {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+}
+
+.stat-trend.up {
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+.stat-trend.down {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.stat-trend i {
+  margin-right: 0.25rem;
+  font-size: 0.7rem;
+}
+
+.total-packages .stat-icon-container {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+}
+
+.in-transit .stat-icon-container {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: #3498db;
+}
+
+.delivered .stat-icon-container {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+}
+
+.active-delivery .stat-icon-container {
+  background-color: rgba(155, 89, 182, 0.15);
+  color: #9b59b6;
+}
+
+.new-shipment-btn {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 700 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 25px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  min-width: 140px;
+  height: auto;
+}
+
+.new-shipment-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 700 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 25px !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.new-shipment-btn:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 700 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.packages-card,
+.map-card {
+  background: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+}
+
+.map-card {
+  border-radius: 12px;
+}
+
+.delivery-map {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Estilos específicos para la tabla de paquetes */
+.package-id {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.delivery-info {
+  line-height: 1.3;
+}
+
+.delivery-id {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.address {
+  font-size: 0.9rem;
+  color: #555;
+  max-width: 200px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.time {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.time.estimated {
+  color: #667eea;
+}
+
+.phone {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Badges de Estado con colores sólidos */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending {
+  background: #ffeaa7;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-in_transit {
+  background: #74b9ff;
+  color: #0056b3;
+  border: 1px solid #74b9ff;
+}
+
+.status-delivered {
+  background: #00b894;
+  color: #155724;
+  border: 1px solid #00b894;
+}
+
+.status-failed {
+  background: #e17055;
+  color: #721c24;
+  border: 1px solid #e17055;
+}
+
+/* Badges de Prioridad con colores sólidos */
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-high {
+  background: #ff6b6b;
+  color: #c62828;
+  border: 1px solid #ff6b6b;
+  animation: pulse-high 2s infinite;
+}
+
+.priority-medium {
+  background: #fdcb6e;
+  color: #f57c00;
+  border: 1px solid #fdcb6e;
+}
+
+.priority-low {
+  background: #6c5ce7;
+  color: white;
+  border: 1px solid #6c5ce7;
+}
+
+/* Animación para prioridad alta */
+@keyframes pulse-high {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-content {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .address {
+    max-width: 150px;
+  }
+  
+  .status-badge,
+  .priority-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .table-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Estilos para Leaflet */
+::ng-deep .leaflet-container {
+  border-radius: 8px;
+}
+
+/* Estilos para el modal de nuevo envío */
+::ng-deep .p-dialog {
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+  background: white !important;
+  border-bottom: 1px solid #e1e8ed !important;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1.5rem !important;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  background: white !important;
+  padding: 1.5rem !important;
+  border-radius: 0 0 12px 12px !important;
+}
+
+::ng-deep .p-dialog .p-dialog-title {
+  color: #2c3e50 !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+}
+
+::ng-deep .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Asegurar que todos los elementos del formulario tengan fondo blanco */
+.modal-form {
+  background: white;
+  padding: 0;
+}
+
+.modal-form .form-group {
+  background: white;
+  margin-bottom: 1.5rem;
+}
+
+.modal-form .form-group label {
+  background: white;
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Estilos específicos para los campos del formulario en el modal */
+::ng-deep .p-dialog .custom-input,
+::ng-deep .p-dialog .custom-textarea {
+  background: white !important;
+  border: 2px solid #e1e8ed !important;
+}
+
+::ng-deep .p-dialog .custom-dropdown .p-dropdown {
+  background: white !important;
+  border: 2px solid #e1e8ed !important;
+}
+
+.shipment-form {
+  padding: 1rem 0;
+}
+
+.field-group {
+  margin-bottom: 1.5rem;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.field-label i {
+  color: #667eea;
+  font-size: 1rem;
+}
+
+.custom-input,
+.custom-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+}
+
+.custom-input:focus,
+.custom-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+::ng-deep .custom-dropdown {
+  width: 100%;
+}
+
+::ng-deep .custom-dropdown .p-dropdown {
+  width: 100%;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+::ng-deep .custom-dropdown .p-dropdown:not(.p-disabled):hover {
+  border-color: #667eea;
+}
+
+::ng-deep .custom-dropdown .p-dropdown:not(.p-disabled).p-focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.delivery-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.status-indicator {
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-indicator.working {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-indicator.off {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e1e8ed;
+}
+
+/* Botón Cancelar mejorado - Color Rojo */
+::ng-deep .form-actions .p-button-secondary {
+  background: #ffffff !important;
+  border: 2px solid #e74c3c !important;
+  color: #e74c3c !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15) !important;
+  min-width: 120px !important;
+}
+
+::ng-deep .form-actions .p-button-secondary:hover:not(:disabled) {
+  background: #e74c3c !important;
+  color: white !important;
+  border-color: #e74c3c !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25) !important;
+}
+
+::ng-deep .form-actions .p-button-secondary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Botón Crear Envío mejorado */
+::ng-deep .form-actions .p-button-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: 2px solid #667eea !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+  min-width: 140px !important;
+}
+
+::ng-deep .form-actions .p-button-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+  border-color: #5a67d8 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4) !important;
+}
+
+::ng-deep .form-actions .p-button-primary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3) !important;
+}
+
+::ng-deep .form-actions .p-button-primary:disabled {
+  background: #cbd5e0 !important;
+  border-color: #cbd5e0 !important;
+  color: #a0aec0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Efectos adicionales para mejor UX */
+::ng-deep .form-actions .p-button {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+::ng-deep .form-actions .p-button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  transition: width 0.3s ease, height 0.3s ease !important;
+}
+
+::ng-deep .form-actions .p-button:hover::before {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+/* Mejoras para los dropdowns del modal */
+::ng-deep .p-dialog .p-select {
+  width: 100% !important;
+  min-height: 45px !important;
+  border: 2px solid #e1e8ed !important;
+  border-radius: 8px !important;
+  background: white !important;
+  font-size: 0.95rem !important;
+}
+
+::ng-deep .p-dialog .p-select:not(.p-disabled):hover {
+  border-color: #667eea !important;
+}
+
+::ng-deep .p-dialog .p-select:not(.p-disabled).p-focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+::ng-deep .p-dialog .p-select .p-select-label {
+  padding: 0.75rem !important;
+  color: #2c3e50 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+::ng-deep .p-dialog .p-select .p-select-label.p-placeholder {
+  color: #6c757d !important;
+  font-style: italic !important;
+}
+
+/* Mejoras adicionales para el panel de opciones del dropdown */
+::ng-deep .p-select-panel {
+  background: white !important;
+  border: 2px solid #667eea !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  margin-top: 4px !important;
+  z-index: 9999 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+::ng-deep .p-select-panel::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: white !important;
+  border-radius: 6px !important;
+  z-index: -1 !important;
+}
+
+::ng-deep .p-select-panel .p-select-items {
+  padding: 0.5rem 0 !important;
+  background: white !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+::ng-deep .p-select-panel .p-select-item {
+  padding: 0.75rem 1rem !important;
+  color: #2c3e50 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+  border: none !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+::ng-deep .p-select-panel .p-select-item:hover {
+  background-color: #f8f9fa !important;
+  color: #667eea !important;
+  font-weight: 500 !important;
+}
+
+::ng-deep .p-select-panel .p-select-item.p-highlight {
+  background-color: #667eea !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Estilos específicos para las opciones de prioridad */
+::ng-deep .p-select-panel .p-select-item[aria-label*="Alta"],
+::ng-deep .p-select-panel .p-select-item[aria-label*="ALTA"] {
+  background: white !important;
+  border-left: 4px solid #e74c3c !important;
+}
+
+::ng-deep .p-select-panel .p-select-item[aria-label*="Media"],
+::ng-deep .p-select-panel .p-select-item[aria-label*="MEDIA"] {
+  background: white !important;
+  border-left: 4px solid #f39c12 !important;
+}
+
+::ng-deep .p-select-panel .p-select-item[aria-label*="Baja"],
+::ng-deep .p-select-panel .p-select-item[aria-label*="BAJA"] {
+  background: white !important;
+  border-left: 4px solid #27ae60 !important;
+}
+
+/* Asegurar que el overlay del dropdown tenga fondo */
+::ng-deep .p-select-panel .p-select-items-wrapper {
+  background: white !important;
+  border-radius: 6px !important;
+}
+
+/* Mejorar la visibilidad del texto en las opciones */
+::ng-deep .p-select-panel .p-select-item {
+  text-shadow: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Agregar un borde interno para mayor definición */
+::ng-deep .p-select-panel {
+  border: 2px solid #667eea !important;
+  outline: 1px solid rgba(255, 255, 255, 0.8) !important;
+  outline-offset: -1px !important;
+}
+
+/* Estilos para cuando el dropdown está abierto */
+::ng-deep .p-select.p-select-open {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Asegurar que el panel esté por encima de todo */
+::ng-deep .p-select-panel {
+  position: fixed !important;
+  z-index: 10000 !important;
+}
+
+/* Mejorar la legibilidad del texto en los dropdowns */
+::ng-deep .p-select-panel .p-select-item {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* Estilos específicos para PrimeNG v20 Select */
+::ng-deep .p-select-overlay {
+  background: white !important;
+  border: 2px solid #667eea !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  z-index: 10000 !important;
+}
+
+::ng-deep .p-select-list {
+  background: white !important;
+  padding: 0.5rem 0 !important;
+}
+
+::ng-deep .p-select-option {
+  background: white !important;
+  color: #2c3e50 !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.95rem !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+::ng-deep .p-select-option:hover {
+  background: #f8f9fa !important;
+  color: #667eea !important;
+}
+
+::ng-deep .p-select-option.p-selected {
+  background: #667eea !important;
+  color: white !important;
+}
+
+::ng-deep .p-select-option.p-focus {
+  background: #f8f9fa !important;
+  color: #667eea !important;
+}
+
+/* Estilos alternativos si usa diferentes clases */
+::ng-deep .p-dropdown-panel {
+  background: white !important;
+  border: 2px solid #667eea !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  z-index: 10000 !important;
+}
+
+::ng-deep .p-dropdown-items {
+  background: white !important;
+  padding: 0.5rem 0 !important;
+}
+
+::ng-deep .p-dropdown-item {
+  background: white !important;
+  color: #2c3e50 !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.95rem !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+::ng-deep .p-dropdown-item:hover {
+  background: #f8f9fa !important;
+  color: #667eea !important;
+}
+
+::ng-deep .p-dropdown-item.p-highlight {
+  background: #667eea !important;
+  color: white !important;
+}
+
+/* Forzar estilos con mayor especificidad */
+::ng-deep .p-component .p-select-overlay,
+::ng-deep .p-component .p-dropdown-panel {
+  background-color: white !important;
+  border: 2px solid #667eea !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+}
+
+::ng-deep .p-component .p-select-list .p-select-option,
+::ng-deep .p-component .p-dropdown-items .p-dropdown-item {
+  background-color: white !important;
+  color: #2c3e50 !important;
+  font-weight: 500 !important;
+}
+
+::ng-deep .p-component .p-select-list .p-select-option:hover,
+::ng-deep .p-component .p-dropdown-items .p-dropdown-item:hover {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+}
+
+/* Asegurar que el overlay esté visible */
+::ng-deep .p-select-overlay,
+::ng-deep .p-dropdown-panel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Estilos para marcadores de repartidores */
+.delivery-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.delivery-marker {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  animation: pulse 2s infinite;
+}
+
+.delivery-label {
+  background: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 2px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.warehouse-marker {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  border: 2px solid #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.delivery-popup {
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para marcadores de delivery en el mapa */
+.delivery-location-marker {
+  background: white;
+  border: 2px solid #4CAF50;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.delivery-location-marker .delivery-info {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  display: none;
+}
+
+.delivery-location-marker:hover .delivery-info {
+  display: block;
+}
+
+/* Estilos para estado de delivery */
+.delivery-status .status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-working {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.status-off {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #f44336;
+}
+
+.no-status {
+  color: #666;
+  font-style: italic;
+}
+
+/* Popup del delivery */
+.delivery-popup h4 {
+  margin: 0 0 10px 0;
+  color: #4CAF50;
+}
+
+.delivery-popup p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.delivery-popup strong {
+  color: #333;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+/* Ocultar iconos por defecto de Leaflet */
+.custom-delivery-icon,
+.custom-warehouse-icon {
+  background: none !important;
+  border: none !important;
+}

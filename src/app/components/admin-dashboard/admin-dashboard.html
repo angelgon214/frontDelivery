@@ -1,0 +1,317 @@
+<div class="admin-dashboard">
+  <!-- Sidebar de navegación -->
+  <div class="admin-sidebar">
+    <div class="sidebar-header">
+      <div class="logo-container">
+        <span class="logo-text">Delivery<span class="accent">Angel</span></span>
+      </div>
+      <div class="sidebar-divider"></div>
+    </div>
+    
+    <div class="sidebar-menu">
+      <div class="menu-item active">
+        <i class="pi pi-home"></i>
+        <span>Dashboard</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-box"></i>
+        <span>Paquetes</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-users"></i>
+        <span>Repartidores</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-chart-bar"></i>
+        <span>Reportes</span>
+      </div>
+      <div class="menu-item">
+        <i class="pi pi-cog"></i>
+        <span>Configuración</span>
+      </div>
+    </div>
+    
+    <div class="sidebar-footer">
+      <div class="menu-item logout" (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+        <span>Cerrar Sesión</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="main-content">
+    <!-- Header superior -->
+    <div class="content-header">
+      <div class="header-title">
+        <h1>Panel de Administración</h1>
+        <p class="subtitle">Bienvenido al centro de control</p>
+      </div>
+      <div class="header-actions">
+        <div class="search-container">
+          <i class="pi pi-search search-icon"></i>
+          <input type="text" placeholder="Buscar..." class="search-input">
+        </div>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <i class="pi pi-user"></i>
+          </div>
+          <span class="user-name">Admin</span>
+        </div>
+      </div>
+    </div>
+    
+  
+    <!-- Mapa arriba -->
+    <div class="map-container">
+      <div class="section-header">
+        <h2>Mapa de Entregas en Tiempo Real</h2>
+        <div class="section-actions">
+          <button class="action-button">
+            <i class="pi pi-refresh"></i>
+          </button>
+          <button class="action-button">
+            <i class="pi pi-filter"></i>
+          </button>
+        </div>
+      </div>
+      <div class="map-wrapper">
+        <div id="adminMap" class="delivery-map"></div>
+      </div>
+    </div>
+
+    <!-- Tabla de Paquetes Detallada -->
+    <div class="packages-section">
+      <div class="section-header">
+        <h2>Gestión de Paquetes</h2>
+        <div class="section-actions">
+          <button class="action-button secondary">
+            <i class="pi pi-filter"></i>
+            <span>Filtrar</span>
+          </button>
+          <button class="action-button primary" (click)="createNewShipment()">
+            <i class="pi pi-plus"></i>
+            <span>Nuevo Envío</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <p-table [value]="packages" [tableStyle]="{'min-width': '50rem'}" [scrollable]="true" scrollHeight="500px" styleClass="custom-table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="id-column">ID Paquete</th>
+              <th class="user-column">Delivery</th>
+              <th class="status-column">Estado Delivery</th>
+              <th class="address-column">Dirección</th>
+              <th class="status-column">Estado</th>
+              <th class="priority-column">Prioridad</th>
+              <th class="phone-column">Teléfono</th>
+              <th class="actions-column">Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-package>
+            <tr class="table-row">
+              <td class="id-column">
+                <span class="package-id">{{ package.id }}</span>
+              </td>
+              <td class="user-column">
+                <div class="user-cell">
+                  <div class="delivery-info" *ngIf="package.assigned_user; else noDelivery">
+                    <strong>{{ package.assigned_user.username }}</strong>
+                    <br>
+                    <small class="delivery-id">ID: {{ package.assigned_user.id }}</small>
+                  </div>
+                  <ng-template #noDelivery>
+                    <span class="status-badge unassigned">Sin asignar</span>
+                  </ng-template>
+                </div>
+              </td>
+              <td class="status-column">
+                <div class="status-cell">
+                  <span class="delivery-status" *ngIf="package.assigned_user">
+                    <span class="status-indicator" [ngClass]="{
+                      'online': package.assigned_user.status === 'working',
+                      'offline': package.assigned_user.status === 'off'
+                    }">
+                    </span>
+                    <span class="status-text">
+                      {{ package.assigned_user.status === 'working' ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </span>
+                  <span *ngIf="!package.assigned_user" class="status-text muted">-</span>
+                </div>
+              </td>
+              <td class="address-column">
+                <div class="address-cell">
+                  <i class="pi pi-map-marker location-icon"></i>
+                  <span class="address-text">{{ package.delivery_address }}</span>
+                </div>
+              </td>
+              <td class="status-column">
+                <span class="status-badge" [ngClass]="package.status">
+                  <i class="pi {{ getStatusIcon(package.status) }}"></i>
+                  {{ getStatusLabel(package.status) }}
+                </span>
+              </td>
+              <td class="priority-column">
+                <span class="priority-badge" [ngClass]="package.priority">
+                  <i class="pi {{ getPriorityIcon(package.priority) }}"></i>
+                  {{ getPriorityLabel(package.priority) }}
+                </span>
+              </td>
+              <td class="phone-column">
+                <div class="phone-cell">
+                  <i class="pi pi-phone phone-icon"></i>
+                  <span class="phone-text">{{ package.phone || 'N/A' }}</span>
+                </div>
+              </td>
+              <td class="actions-column">
+                <div class="action-buttons">
+                  <button class="table-action-button edit">
+                    <i class="pi pi-pencil"></i>
+                  </button>
+                  <button class="table-action-button view">
+                    <i class="pi pi-eye"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Nuevo Envío -->
+<p-dialog header="Crear Nuevo Envío" [(visible)]="showNewShipmentModal" [modal]="true" [style]="{width: '500px'}" [closable]="true" [draggable]="false" [resizable]="false" styleClass="modern-dialog">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <div class="dialog-icon">
+        <i class="pi pi-box"></i>
+      </div>
+      <div class="dialog-title">
+        <h3>Información del Paquete</h3>
+        <p>Complete los detalles para crear un nuevo envío</p>
+      </div>
+    </div>
+    
+    <form [formGroup]="newShipmentForm" (ngSubmit)="onSubmitNewShipment()" class="form-container">
+      <div class="field-group">
+        <label for="deliveryAddress" class="form-label">
+          <i class="pi pi-map-marker"></i>
+          Dirección de Entrega *
+        </label>
+        <div class="input-container">
+          <input 
+            pInputText 
+            id="deliveryAddress"
+            formControlName="deliveryAddress"
+            placeholder="Ingresa la dirección completa de entrega"
+            class="modern-input" />
+        </div>
+        <small class="error-message" *ngIf="newShipmentForm.get('deliveryAddress')?.invalid && newShipmentForm.get('deliveryAddress')?.touched">
+          La dirección de entrega es requerida (mínimo 10 caracteres)
+        </small>
+      </div>
+
+      <div class="field-group">
+        <label for="phone" class="form-label">
+          <i class="pi pi-phone"></i>
+          Teléfono de Contacto
+        </label>
+        <div class="input-container">
+          <input 
+            pInputText 
+            id="phone"
+            formControlName="phone"
+            placeholder="Ingresa el número de teléfono"
+            class="modern-input" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group half">
+          <label for="priority" class="form-label">
+            <i class="pi pi-flag"></i>
+            Prioridad
+          </label>
+          <p-select 
+            id="priority"
+            formControlName="priority"
+            [options]="priorityOptions"
+            placeholder="Selecciona la prioridad"
+            optionLabel="label"
+            optionValue="value"
+            styleClass="modern-dropdown">
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="priority-option" *ngIf="selectedOption">
+                <span class="priority-dot" [ngClass]="selectedOption.value"></span>
+                <i class="pi {{ getPriorityIcon(selectedOption.value) }}"></i>
+                <span>{{ selectedOption.label }}</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="item" let-option>
+              <div class="priority-option">
+                <span class="priority-dot" [ngClass]="option.value"></span>
+                <i class="pi {{ getPriorityIcon(option.value) }}"></i>
+                <span>{{ option.label }}</span>
+              </div>
+            </ng-template>
+          </p-select>
+        </div>
+
+        <div class="field-group half">
+          <label for="assignedTo" class="form-label">
+            <i class="pi pi-user"></i>
+            Selecciona un delivery
+          </label>
+          <p-select 
+            id="assignedTo"
+            formControlName="assignedTo"
+            [options]="deliveryUsers"
+            placeholder="Selecciona un delivery"
+            optionLabel="username"
+            optionValue="id"
+            styleClass="modern-dropdown"
+            [showClear]="true">
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="delivery-option" *ngIf="selectedOption">
+                <i class="pi pi-user"></i>
+                <span>{{ selectedOption.username }}</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="item" let-option>
+              <div class="delivery-option">
+                <i class="pi pi-user"></i>
+                <span>{{ option.username }}</span>
+                <span class="status-indicator" [ngClass]="option.status">
+                  {{ option.status === 'working' ? 'Trabajando' : 'Libre' }}
+                </span>
+              </div>
+            </ng-template>
+          </p-select>
+        </div>
+      </div>
+
+      <div class="dialog-footer">
+        <button 
+          type="button" 
+          class="dialog-button secondary" 
+          (click)="closeNewShipmentModal()"
+          [disabled]="creatingShipment">
+          <i class="pi pi-times"></i>
+          <span>Cancelar</span>
+        </button>
+        <button 
+          type="submit" 
+          class="dialog-button primary" 
+          [disabled]="newShipmentForm.invalid || creatingShipment">
+          <i class="pi pi-check"></i>
+          <span>{{ creatingShipment ? 'Creando...' : 'Crear Envío' }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
